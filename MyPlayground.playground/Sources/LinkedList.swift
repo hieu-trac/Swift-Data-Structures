@@ -12,6 +12,7 @@ public struct LinkedList<Value> {
     }
     
     public mutating func push(_ value: Value) {
+        copyNodes()
         head = Node(value: value, next: head)
         if tail == nil {
             tail = head
@@ -19,6 +20,7 @@ public struct LinkedList<Value> {
     }
     
     public mutating func append(_ value: Value) {
+        copyNodes()
         
         guard !isEmpty else {
             push(value)
@@ -44,6 +46,7 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func insert(_ value: Value, after node: Node<Value>) -> Node<Value> {
+        copyNodes()
         guard tail !== node else {
             append(value)
             return tail!
@@ -54,6 +57,7 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func pop() -> Value? {
+        copyNodes()
         defer {
             head = head?.next
             if isEmpty {
@@ -65,6 +69,7 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func removeLast() -> Value? {
+        copyNodes()
         guard let head = head else {
             return nil
         }
@@ -85,6 +90,7 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func remove(after node: Node<Value>) -> Value? {
+        guard let node = copyNodes(returningCopyOf: node) else { return nil }
         defer {
             if node.next === tail {
                 tail = node
@@ -93,6 +99,52 @@ public struct LinkedList<Value> {
         }
         return node.next?.value
     }
+    
+    private mutating func copyNodes() {
+        guard !isKnownUniquelyReferenced(&head) else {
+            return
+        }
+        guard var oldNode = head else {
+            return
+        }
+        
+        head = Node(value: oldNode.value)
+        var newNode = head
+        
+        while let nextOldNode = oldNode.next {
+            newNode!.next = Node(value: nextOldNode.value)
+            newNode = newNode!.next
+            
+            oldNode = nextOldNode
+        }
+        
+        tail = newNode
+    }
+    
+    private mutating func copyNodes(returningCopyOf node: Node<Value>?) -> Node<Value>? {
+        guard !isKnownUniquelyReferenced(&head) else {
+            return nil
+        }
+        guard var oldNode = head else {
+            return nil
+        }
+        
+        head = Node(value: oldNode.value)
+        var newNode = head
+        var nodeCopy: Node<Value>?
+        
+        while let nextOldNode = oldNode.next {
+            if oldNode === node {
+                nodeCopy = newNode
+            }
+            newNode!.next = Node(value: nextOldNode.value)
+            newNode = newNode!.next
+            oldNode = nextOldNode
+        }
+        
+        return nodeCopy
+    }
+    
 }
 
 extension LinkedList: CustomStringConvertible {
@@ -131,20 +183,46 @@ extension LinkedList: Collection {
         }
     }
     
-    // 1
     public var startIndex: Index {
         Index(node: head)
     }
-    // 2
+    
     public var endIndex: Index {
         Index(node: tail?.next)
     }
-    // 3
+    
     public func index(after i: Index) -> Index {
         Index(node: i.node?.next)
     }
-    // 4
+    
     public subscript(position: Index) -> Value {
         position.node!.value
+    }
+}
+
+extension LinkedList {
+    public mutating func reverse() {
+        var tempList = LinkedList<Value>()
+        for value in self {
+            tempList.push(value)
+        }
+        head = tempList.head
+    }
+    
+    public mutating func reverseComplex() {
+        
+        tail = head
+        var prev = head
+        var current = head?.next
+        prev?.next = nil
+        
+        while current != nil {
+            let next = current?.next
+            current?.next = prev
+            prev = current
+            current = next
+        }
+        
+        head = prev
     }
 }
