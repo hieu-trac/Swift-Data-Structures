@@ -226,3 +226,26 @@ extension LinkedList {
         head = prev
     }
 }
+
+extension LinkedList where Value: Equatable {
+    public mutating func removeAll(_ value: Value) {
+        while let _head = head, _head.value == value {
+            head = _head.next
+        }
+        
+        var prev = head
+        var current = head?.next
+        
+        while let currentNode = current {
+            guard currentNode.value != value else {
+                prev?.next = currentNode.next
+                current = prev?.next
+                continue
+            }
+            prev = current
+            current = current?.next
+        }
+        
+        tail = prev
+    }
+}
