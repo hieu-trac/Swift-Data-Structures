@@ -3,5 +3,7 @@
     <pages>
         <page name='Complexity'/>
         <page name='Stacks'/>
+        <page name='LinkedLists'/>
+        <page name='Queues'/>
     </pages>
 </playground>

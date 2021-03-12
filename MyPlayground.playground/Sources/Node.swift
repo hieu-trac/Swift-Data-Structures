@@ -1,11 +1,16 @@
 import Foundation
 
-public class Node<Value> {
+public class Node<T> {
     
-    public var value: Value
-    public var next: Node?
+    public var value: T
+    public var next: Node<T>?
+    public var previous: Node<T>?
     
-    public init(value: Value, next: Node? = nil) {
+    public init(value: T) {
+        self.value = value
+    }
+    
+    public init(value: T, next: Node? = nil, previous: Node? = nil) {
         self.value = value
         self.next = next
     }
