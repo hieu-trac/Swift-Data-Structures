@@ -5,12 +5,12 @@ public struct QueueArray<T>: Queue {
     
     public init() {}
     
-    public mutating func enqueue(_ element: T) -> Bool {
+    @discardableResult public mutating func enqueue(_ element: T) -> Bool {
         storage.append(element)
         return true
     }
     
-    public mutating func dequeue() -> T? {
+    @discardableResult public mutating func dequeue() -> T? {
         isEmpty ? nil : storage.removeFirst()
     }
     
@@ -18,7 +18,7 @@ public struct QueueArray<T>: Queue {
         storage.isEmpty
     }
     
-    public var peek: Element? {
+    public var peek: T? {
         storage.first
     }
 }

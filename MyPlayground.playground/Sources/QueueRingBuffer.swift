@@ -16,11 +16,11 @@ public struct QueueRingBuffer<T>: Queue {
         ringBuffer.first
     }
     
-    public mutating func enqueue(_ element: T) -> Bool {
+    @discardableResult public mutating func enqueue(_ element: T) -> Bool {
         ringBuffer.write(element)
     }
     
-    public mutating func dequeue() -> T? {
+    @discardableResult public mutating func dequeue() -> T? {
         ringBuffer.read()
     }
 }

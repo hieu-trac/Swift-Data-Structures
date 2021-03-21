@@ -13,12 +13,12 @@ public class QueueLinkedList<T>: Queue {
         storage.first?.value
     }
     
-    public func enqueue(_ element: T) -> Bool {
+    @discardableResult public func enqueue(_ element: T) -> Bool {
         storage.append(element)
         return true
     }
     
-    public func dequeue() -> T? {
+    @discardableResult public func dequeue() -> T? {
         guard !storage.isEmpty, let element = storage.first else {
             return nil
         }

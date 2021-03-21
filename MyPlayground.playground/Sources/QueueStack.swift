@@ -14,12 +14,12 @@ public struct QueueStack<T> : Queue {
         !dequeueStack.isEmpty ? dequeueStack.last : enqueueStack.first
     }
     
-    public mutating func enqueue(_ element: T) -> Bool {
+    @discardableResult public mutating func enqueue(_ element: T) -> Bool {
         enqueueStack.append(element)
         return true
     }
     
-    public mutating func dequeue() -> T? {
+    @discardableResult public mutating func dequeue() -> T? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
