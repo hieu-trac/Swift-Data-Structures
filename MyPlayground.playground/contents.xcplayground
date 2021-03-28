@@ -7,5 +7,6 @@
         <page name='Queues'/>
         <page name='Trees'/>
         <page name='BinaryTrees'/>
+        <page name='AVLTrees'/>
     </pages>
 </playground>

@@ -1,6 +1,6 @@
 import Foundation
 
-public class BinaryNode<T> {
+final public class BinaryNode<T> {
     
     public var value: T
     public var leftChild: BinaryNode?
@@ -22,25 +22,9 @@ public class BinaryNode<T> {
     }
 }
 
+extension BinaryNode: TraversableBinaryNode { }
+
 extension BinaryNode {
-    
-    public func traverseInOrder(visit: (T) -> Void) {
-        leftChild?.traverseInOrder(visit: visit)
-        visit(value)
-        rightChild?.traverseInOrder(visit: visit)
-    }
-    
-    public func traversePreOrder(visit: (T) -> Void) {
-        visit(value)
-        leftChild?.traversePreOrder(visit: visit)
-        rightChild?.traversePreOrder(visit: visit)
-    }
-    
-    public func traversePostOrder(visit: (T) -> Void) {
-        leftChild?.traversePostOrder(visit: visit)
-        rightChild?.traversePostOrder(visit: visit)
-        visit(value)
-    }
     
     public func traversePreOrderInclusive(visit: (T?) -> Void) {
         visit(value)
