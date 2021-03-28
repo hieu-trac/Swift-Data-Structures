@@ -10,5 +10,6 @@
         <page name='AVLTrees'/>
         <page name='Tries'/>
         <page name='BinarySearch'/>
+        <page name='Heaps'/>
     </pages>
 </playground>
