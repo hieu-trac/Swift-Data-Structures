@@ -9,5 +9,6 @@
         <page name='BinaryTrees'/>
         <page name='AVLTrees'/>
         <page name='Tries'/>
+        <page name='BinarySearch'/>
     </pages>
 </playground>
