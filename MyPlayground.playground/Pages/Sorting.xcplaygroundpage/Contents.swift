@@ -198,4 +198,14 @@ example(of: "lexicographical sort") {
     print(array) // outputs [13, 1345, 44, 459, 500, 999]
 }
 
+example(of: "heap sort") {
+    let heap = Heap(sort: <, elements: [6, 12, 2, 26, 8, 18, 21, 9, 5])
+    print(heap.sorted())
+    
+    var array = [500, 1345, 13, 459, 44, 999]
+    array.heapSort()
+    print(array)
+
+}
+
 //: [Next](@next)

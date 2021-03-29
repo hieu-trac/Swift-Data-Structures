@@ -107,26 +107,6 @@ extension Heap {
         return elements.removeLast()
     }
     
-    private mutating func siftDown(from index: Int) {
-        var parent = index
-        while true {
-            let left = leftChildIndex(ofParentAt: parent)
-            let right = rightChildIndex(ofParentAt: parent)
-            var candidate =  parent
-            if left < count && sort(elements[left], elements[candidate]) {
-                candidate = left
-            }
-            if right < count && sort(elements[right], elements[candidate]) {
-                candidate = right
-            }
-            if candidate == parent {
-                return
-            }
-            elements.swapAt(parent, candidate)
-            parent = candidate
-        }
-    }
-    
     public mutating func insert(_ element: T) {
         elements.append(element)
         siftUp(from: elements.count - 1)
@@ -141,10 +121,39 @@ extension Heap {
             parent = parentIndex(ofChildAt: child)
         }
     }
+    
+    private mutating func siftDown(from index: Int, upTo size: Int? = nil) {
+        let size = size ?? count
+        var parent = index
+        while true {
+          let left = leftChildIndex(ofParentAt: parent)
+          let right = rightChildIndex(ofParentAt: parent)
+          var candidate = parent
+          if left < size && sort(elements[left], elements[candidate]) {
+            candidate = left
+          }
+          if right < size && sort(elements[right], elements[candidate]) {
+            candidate = right
+          }
+          if candidate == parent {
+            return
+          }
+          elements.swapAt(parent, candidate)
+          parent = candidate
+        }
+      }
 }
 
 extension Heap {
 
+    public func sorted() -> [T] {
+        var heap = Heap(sort: sort, elements: elements)
+        for index in heap.elements.indices.reversed() {
+            heap.elements.swapAt(0, index)
+            heap.siftDown(from: 0, upTo: index)
+        }
+        return heap.elements
+    }
 }
 
 extension Heap: CustomStringConvertible {
