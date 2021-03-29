@@ -176,7 +176,7 @@ func merge<T: Sequence>(first: T, second: T) -> AnySequence<T.Element> where T.E
 }
 
 example(of: "challenge 2") {
-
+    
     let array1 = [1, 2, 3, 4, 5, 6, 7, 8]
     let array2 = [1, 3, 4, 5, 5, 6, 7, 7]
     
@@ -184,4 +184,18 @@ example(of: "challenge 2") {
         print(element)
     }
 }
+
+example(of: "radix sort") {
+    var array = [88, 410, 1772, 20]
+    print("Original array: \(array)")
+    array.radixSort()
+    print("Radix sorted: \(array)")
+}
+
+example(of: "lexicographical sort") {
+    var array = [500, 1345, 13, 459, 44, 999]
+    array.lexicographicalSort()
+    print(array) // outputs [13, 1345, 44, 459, 500, 999]
+}
+
 //: [Next](@next)
