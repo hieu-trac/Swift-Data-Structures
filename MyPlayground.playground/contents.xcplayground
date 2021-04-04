@@ -13,5 +13,6 @@
         <page name='Heaps'/>
         <page name='PriorityQueues'/>
         <page name='Sorting'/>
+        <page name='QuickSorts'/>
     </pages>
 </playground>
