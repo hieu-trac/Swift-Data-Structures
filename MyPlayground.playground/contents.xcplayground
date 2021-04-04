@@ -14,5 +14,6 @@
         <page name='PriorityQueues'/>
         <page name='Sorting'/>
         <page name='QuickSorts'/>
+        <page name='Graphs'/>
     </pages>
 </playground>
