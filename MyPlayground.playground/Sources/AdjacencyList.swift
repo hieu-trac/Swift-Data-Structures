@@ -27,6 +27,9 @@ public class AdjacencyList<T: Hashable>: Graph {
             .weight
     }
     
+    public var allVertices: [Vertex<T>] {
+        Array(adjacencies.keys)
+    }
 }
 
 extension AdjacencyList: CustomStringConvertible {

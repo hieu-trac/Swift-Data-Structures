@@ -37,6 +37,10 @@ public class AdjacencyMatrix<T>: Graph {
     public func weight(from source: Vertex<T>, to destination: Vertex<T>) -> Double? {
         weights[source.index][destination.index]
     }
+    
+    public var allVertices: [Vertex<T>] {
+        vertices
+    }
 }
 
 extension AdjacencyMatrix: CustomStringConvertible {
@@ -58,7 +62,7 @@ extension AdjacencyMatrix: CustomStringConvertible {
             grid.append(row)
         }
         let edgesDescription = grid.joined(separator: "\n")
-
+        
         return "\(verticesDescription)\n\n\(edgesDescription)"
     }
 }

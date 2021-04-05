@@ -16,6 +16,7 @@ public protocol Graph {
     func add(_ edge: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>, weight: Double?)
     func edges(from source: Vertex<Element>) -> [Edge<Element>]
     func weight(from source: Vertex<Element>, to destination: Vertex<Element>) -> Double?
+    var allVertices: [Vertex<Element>] { get }
 }
 
 public extension Graph {
@@ -59,5 +60,55 @@ public extension Graph where Element: Hashable {
         }
         
         visited.remove(source)
+    }
+    
+    func breadthFirstSearch(from source: Vertex<Element>) -> [Vertex<Element>] {
+        var queue = QueueStack<Vertex<Element>>()
+        var enqueued: Set<Vertex<Element>> = []
+        var visited: [Vertex<Element>] = []
+        
+        queue.enqueue(source)
+        enqueued.insert(source)
+        
+        while let vertex = queue.dequeue() {
+            visited.append(vertex)
+            let neighborEdges = edges(from: vertex)
+            neighborEdges.forEach { edge in
+                if !enqueued.contains(edge.destination) {
+                    queue.enqueue(edge.destination)
+                    enqueued.insert(edge.destination)
+                }
+            }
+        }
+        
+        return visited
+    }
+    
+    func breadthFirstSearchRecursive(from source: Vertex<Element>) -> [Vertex<Element>] {
+        var queue = QueueStack<Vertex<Element>>()
+        var enqueued: Set<Vertex<Element>> = []
+        var visited: [Vertex<Element>] = []
+        
+        queue.enqueue(source)
+        enqueued.insert(source)
+        
+        bfs(queue: &queue, enqueued: &enqueued, visited: &visited)
+        
+        return visited
+    }
+    
+    private func bfs(queue: inout QueueStack<Vertex<Element>>, enqueued: inout Set<Vertex<Element>>, visited: inout [Vertex<Element>]) {
+        guard let vertex = queue.dequeue() else { return }
+        
+        visited.append(vertex)
+        
+        let neighborEdges = edges(from: vertex)
+        neighborEdges.forEach { edge in
+            if !(enqueued.contains((edge.destination))) {
+                queue.enqueue(edge.destination)
+                enqueued.insert(edge.destination)
+            }
+        }
+        bfs(queue: &queue, enqueued: &enqueued, visited: &visited)
     }
 }

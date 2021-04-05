@@ -15,5 +15,6 @@
         <page name='Sorting'/>
         <page name='QuickSorts'/>
         <page name='Graphs'/>
+        <page name='BreadthFirstSearch'/>
     </pages>
 </playground>
