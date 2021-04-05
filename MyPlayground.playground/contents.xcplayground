@@ -16,5 +16,6 @@
         <page name='QuickSorts'/>
         <page name='Graphs'/>
         <page name='BreadthFirstSearch'/>
+        <page name='Depth-First Search'/>
     </pages>
 </playground>
