@@ -16,12 +16,12 @@ public struct PriorityQueue<T: Equatable>: Queue {
         heap.peek()
     }
     
-    public mutating func enqueue(_ element: T) -> Bool {
+    @discardableResult public mutating func enqueue(_ element: T) -> Bool {
         heap.insert(element)
         return true
     }
     
-    public mutating func dequeue() -> T? {
+    @discardableResult public mutating func dequeue() -> T? {
         heap.remove()
     }
 }

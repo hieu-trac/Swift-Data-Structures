@@ -1,6 +1,10 @@
 import Foundation
 
 public class AdjacencyMatrix<T>: Graph {
+    public func copyVertices(from graph: AdjacencyMatrix<T>) {
+        vertices = graph.allVertices
+    }
+    
     
     private var vertices: [Vertex<T>] = []
     private var weights: [[Double?]] = []

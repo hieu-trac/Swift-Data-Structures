@@ -18,5 +18,6 @@
         <page name='BreadthFirstSearch'/>
         <page name='Depth-First Search'/>
         <page name='Dijkstra&apos;s Algorithm'/>
+        <page name='Prim&apos;s Algorithm'/>
     </pages>
 </playground>

@@ -12,6 +12,13 @@ public class AdjacencyList<T: Hashable>: Graph {
         return vertex
     }
     
+    
+    public func copyVertices(from graph: AdjacencyList<T>) {
+        for vertex in graph.allVertices {
+            adjacencies[vertex] = []
+        }
+    }
+    
     public func addDirectedEdge(from source: Vertex<T>, to destination: Vertex<T>, weight: Double?) {
         let edge = Edge(source: source, destination: destination, weight: weight)
         adjacencies[source]?.append(edge)

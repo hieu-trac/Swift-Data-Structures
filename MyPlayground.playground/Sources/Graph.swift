@@ -17,6 +17,7 @@ public protocol Graph {
     func edges(from source: Vertex<Element>) -> [Edge<Element>]
     func weight(from source: Vertex<Element>, to destination: Vertex<Element>) -> Double?
     var allVertices: [Vertex<Element>] { get }
+    func copyVertices(from graph: Self)
 }
 
 public extension Graph {
