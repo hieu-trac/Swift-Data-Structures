@@ -173,14 +173,14 @@ public extension Graph where Element: Hashable {
     
     func hasCycle(from source: Vertex<Element>) -> Bool {
         var pushed: Set<Vertex<Element>> = []
-        return hasCycle(from: source, &pushed)
+        return hasCycle(from: source, pushed: &pushed)
     }
     
-    private hasCycle(from source: Vertex<Element>, pushed: inout Set<Vertex<Element>>) -> Bool {
+    private func hasCycle(from source: Vertex<Element>, pushed: inout Set<Vertex<Element>>) -> Bool {
         pushed.insert(source)
         let neighbors = edges(from: source)
         for edge in neighbors {
-            if !pushed.constains(edge.destination) && hasCycle(from: edge.destination, pushed: &pushed) {
+            if !pushed.contains(edge.destination) && hasCycle(from: edge.destination, pushed: &pushed) {
                 return true
             } else if pushed.contains(edge.destination) {
                 return true
